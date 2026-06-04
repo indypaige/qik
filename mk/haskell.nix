@@ -15,4 +15,4 @@ let ghcv = "ghc${ghcv}";
 in ghcp.developPackage
   { modifier = drv: pkgs.haskell.lib.addBuildTools drv tool;
     inherit name root;
-  };
+  }
