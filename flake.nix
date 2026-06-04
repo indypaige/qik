@@ -14,6 +14,6 @@
         let pkgs =    import nixpkgs { inherit system;              };
             load = l: import l       { inherit system pkgs nixpkgs; };
         in
-          { haskell.mk = load ./mk/haskell.nix;
+          { lib.haskell = load ./mk/haskell.nix;
           });
 }
