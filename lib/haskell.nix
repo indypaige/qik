@@ -6,7 +6,7 @@
 rec {
   defaultGhcv = "9124";
   mk          = { ghcv ? defaultGhcv
-                , tool ? []
+                , tool ? (_: [])
                 , name
                 , root
                 , ...
