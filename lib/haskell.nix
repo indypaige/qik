@@ -6,6 +6,7 @@
 rec {
   defaultGhcv = "9124";
   mk          = { ghcv ? defaultGhcv
+                , tool ? []
                 , name
                 , root
                 , ...
@@ -13,9 +14,9 @@ rec {
                   let ghcr = "ghc${ghcv}";
                       ghcp = pkgs.haskell.packages.${ghcr};
                       ghcc = pkgs.haskell.compiler.${ghcr};
-                      tool = [ ghcc ghcp.cabal-install pkgs.hpack ];
+                      t    = [ ghcc ghcp.cabal-install pkgs.hpack ] ++ tool;
                   in ghcp.developPackage
-                    { modifier = drv: pkgs.haskell.lib.addBuildTools drv tool;
+                    { modifier = drv: pkgs.haskell.lib.addBuildTools drv t;
                       inherit name root;
                     };
 }
