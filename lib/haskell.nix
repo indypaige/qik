@@ -5,7 +5,8 @@
 
 rec {
   defaultGhcv = "9124";
-  mk          = { ghcv ? defaultGhcv
+  mk          = { sourceOverrides ? {}
+                , ghcv ? defaultGhcv
                 , tool ? (_: [])
                 , name
                 , root
@@ -17,6 +18,7 @@ rec {
                       t    = [ ghcc ghcp.cabal-install pkgs.hpack ] ++ (tool pkgs);
                   in ghcp.developPackage
                     { modifier = drv: pkgs.haskell.lib.addBuildTools drv t;
+                      source-overrides = sourceOverrides;
                       inherit name root;
                     };
 }
